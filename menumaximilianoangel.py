@@ -65,11 +65,15 @@ while True:
         leer_archivo(nombre)
     elif seleccion == "5":
         nombre = input("Ingrese el nombre del archivo al que desea agregar un contenido (Agregar .txt): \n> ")
-        contenido = input("\nIngrese el texto que desea agregar en el archivo: \n> ")
-        agregar_archivo(nombre, contenido)
+        if os.path.exists(nombre):
+            contenido = input("\nIngrese el texto que desea escribir en el archivo: \n> ")
+            agregar_archivo(nombre, contenido)
+        else: 
+            print("Archivo "+ nombre +" no existe.") 
     elif seleccion == "6":
         print("Saliendo del programa... ")
         break
     else:
         print("Error, opción invalida. ") 
+
 
