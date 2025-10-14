@@ -38,12 +38,12 @@ def agregar_archivo(nombre, contenido):
 while True:
     print("""
 |==========Acciones de archivo==========|
-     1.- Crear archivo (p.ej. test.txt)
-     2.- Eliminar archivo
-     3.- Escribir archivo (modo w)
-     4.- Leer archivo (modo r)
-     5.- Agregar archivo (modo a) 
-     6.- Salir 
+    1.- Crear archivo (p.ej. test.txt)
+    2.- Eliminar archivo
+    3.- Escribir archivo (modo w)
+    4.- Leer archivo (modo r)
+    5.- Agregar archivo (modo a) 
+    6.- Salir 
 |=======================================|
  """)
     seleccion = input("Ingrese el número de la acción que desea: \n> ")
@@ -72,3 +72,4 @@ while True:
         break
     else:
         print("Error, opción invalida. ") 
+
