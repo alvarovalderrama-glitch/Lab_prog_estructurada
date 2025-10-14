@@ -18,9 +18,9 @@ while True:
     # Se imprime un menú para seleccionar el tamaño de las matrices.
     print("""
 |=================Tamaño de matrices=================|
-     1.- Matriz A = 2x3 y Matriz B = 3x2 (Original)
-     2.- Matriz A = 2x3 y Matriz B = 4x2
-     3.- Salir.
+    1.- Matriz A = 2x3 y Matriz B = 3x2 (Original)
+    2.- Matriz A = 2x3 y Matriz B = 4x2
+    3.- Salir.
 |====================================================|
  """)
     seleccion = input("Ingrese la opción que desea usar: \n> ") # Se crea la variable "seleccion" que será un "input" que se le leerá como una cadena de texto (string).
@@ -62,3 +62,4 @@ while True:
 # Imprime cada fila resultante de la multiplicación de A y B
 #for fila in mm(A, B):
 #    print(fila)
+
