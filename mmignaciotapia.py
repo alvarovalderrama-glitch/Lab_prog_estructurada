@@ -1,6 +1,6 @@
 def mm(A, B):
-    BT = list(zip(*B))  # Transpose matrix B
-    C = []
+    C=[]
+    BT = list(zip(*B))  
     for fila in A:
         nueva_fila = []
         for col in BT:
@@ -14,3 +14,5 @@ B = [[7, 8],[9, 10],[11, 12]]
 
 for fila in mm(A,B):
     print(fila)
+
+    
