@@ -37,10 +37,10 @@ while True: # Ciclo repetivo "while" con el valor booleano True, para que se rep
     # Se imprime el menú para poder ver las opciones que se pueden seleccionar.
     print("""
 |================Menú de números================|
-     1.- Todos los números iguales (Original).
-     2.- Todos números aleatorios (Opción 1).
-     3.- Todos números aleatorios (Opción 2).
-     4.- Salir.
+    1.- Todos los números iguales (Original).
+    2.- Todos números aleatorios (Opción 1).
+    3.- Todos números aleatorios (Opción 2).
+    4.- Salir.
 |===============================================|
  """)
     # Se crea la variable "seleccion" en la que se usa un "input(...)", para que el usuario ingrese que opción quiere y que la tome como una cadena de texto (string).
@@ -57,3 +57,4 @@ while True: # Ciclo repetivo "while" con el valor booleano True, para que se rep
         break # Hace que se rompa el ciclo "while".
     else: # Si no se cumple ninguna de las condiciones anteriores ejecutará lo siguiente.
         print("Opción invalida, elige otra.") # Imprime el mensaje "Opción invalida, elige otra."
+
