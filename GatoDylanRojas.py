@@ -1,6 +1,6 @@
 ﻿import random
 
-# --- 1. UTILIDADES Y LÓGICA BASE ---
+# 1. UTILIDADES Y LÓGICA BASE 
 
 def crear_tablero():
     return [' '] * 10
@@ -26,7 +26,7 @@ def verificar_ganador(tablero, marca):
 def verificar_empate(tablero):
     return ' ' not in tablero[1:]
 
-# --- 2. MANEJO DE MOVIMIENTOS ---
+#  . MANEJO DE MOVIMIENTOS 
 
 def obtener_movimiento_humano(tablero, jugador):
     """Pide al jugador una posición válida."""
@@ -40,7 +40,7 @@ def obtener_movimiento_humano(tablero, jugador):
             print('Entrada inválida. Debe ser un número.')
 
 def obtener_movimiento_pc(tablero, pc_marca):
-    """IA simple: 1. Ganar, 2. Bloquear, 3. Esquina, 4. Centro, 5. Lado."""
+    """PC simple: 1. Ganar, 2. Bloquear, 3. Esquina, 4. Centro, 5. Lado."""
     jugador_marca = 'X' if pc_marca == 'O' else 'O'
     
     # 1. Chequear si la PC puede ganar o si el jugador puede ganar (y bloquear)
@@ -56,7 +56,7 @@ def obtener_movimiento_pc(tablero, pc_marca):
     movs = [i for i in [1, 3, 7, 9, 5, 2, 4, 6, 8] if tablero[i] == ' ']
     return movs[0] if movs else 0
 
-# --- 3. BUCLE PRINCIPAL CON SELECCIÓN DE MODO ---
+#  3. BUCLE PRINCIPAL CON SELECCIÓN DE MODO 
 
 def jugar_gato():
     print('¡Bienvenido al Gato! 🐱')
@@ -98,7 +98,7 @@ def jugar_gato():
         # Cambiar de turno
         jugador_actual = 'O' if jugador_actual == 'X' else 'X'
 
-# --- INICIO ---
+#  INICIO 
 if __name__ == '__main__':
     while True:
         jugar_gato()
