@@ -1,7 +1,8 @@
 import random #importar random
 
-digitos = [str(random.randint(0, 9)) for _ in range(4)]  #crear numeros aleatorios del 0 al 9
-print(digitos)
+digitos = [str(d) for d in random.sample(range(10), 4)]
+print(digitos)  #crear numeros aleatorios del 0 al 9
+
 
 
 
@@ -21,7 +22,7 @@ def fama_y_toques(digitos,intento):  #modulo de fama
     for d in intento_restante:   #para d dentro de la lista intento restante
         if d in digitos_restantes:    #si d esta en digitos restantes, se le suma 1 toque y se borra el numero para q no se repita
             toques += 1
-            intento_restante.remove(d)
+            intento_restante.remove(d)    
 
             
 
