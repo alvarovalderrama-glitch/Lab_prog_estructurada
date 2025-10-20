@@ -75,6 +75,13 @@ while flag != True:
     if opcion == 3:
         nombre_arch = input("Ingrese el archivo en el que desee escribir: ")
         flag1 = existe_archivo(nombre_arch)
+            
+        if flag1 == True:
+            contenido = input("Ingrese el contenido que desee escribir en el archivo: ")
+            escribir_archivo(nombre_arch, contenido)
+            
+        else:
+            print("El archivo " + nombre_arch + " no existe.")
     
     if opcion == 4:
         nombre_arch = input("Ingrese el nombre del archivo que el programa desee que lee: ")
