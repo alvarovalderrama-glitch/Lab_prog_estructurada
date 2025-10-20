@@ -2,7 +2,11 @@
 
 import random
 
-secreto = "".join(random.sample("0123456789", 4)) # Genera un número secreto de 4 dígitos distintos
+secreto = ""
+while len(secreto) < 4:
+    digito = str(random.randint(0, 9))  # Elige un dígito aleatorio del 0 al 9
+    if digito not in secreto:          # Asegura que no se repita
+        secreto += digito              # Lo añade al número secreto
 
 intentos = []  # Guardará tu historial: [(intento, toque, fama), ...]
 
