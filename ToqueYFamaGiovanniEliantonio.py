@@ -43,7 +43,8 @@ def jugar():
         intentos += 1  # Aumenta el número de intentos
 
     # Mensaje final cuando el usuario acierta
-    print("¡Felicitaciones! Has acertado en " + intentos + " intentos")
+    print(f"¡Felicitaciones! Has acertado en {intentos} intentos")
 
 # Inicia el juego
+
 jugar()
