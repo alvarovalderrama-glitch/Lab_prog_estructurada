@@ -39,7 +39,7 @@ for _ in range(9):
                 print("Gana", turno) # imprimira el ganador y terminara el juego
                 exit() #Final del juego
 
-        turno = "O" if turno == "X" else "X"
+        turno = "O" if turno == "X" else "X" # Cambiar de jugadores despues de cada turno
 
 mostrar()
 print("Empate") # En caso de empate se imprimira un mensaje que diga empate y terminara el juego
