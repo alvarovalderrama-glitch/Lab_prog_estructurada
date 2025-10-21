@@ -1,8 +1,8 @@
-import random
+# ==========================
+#  JUEGO DEL GATO (JUGADOR vs MÁQUINA)
+# ==========================
 
-# ==========================
-#  JUEGO DEL GATO (JUGADOR vs MÁQUINA) con arreglos
-# ==========================
+import random
 
 # -------- FUNCIÓN PARA MOSTRAR TABLERO --------
 def mostrar_tablero(tablero):
@@ -44,6 +44,7 @@ def movimiento_maquina(tablero):
 # -------- FUNCIÓN PARA PREGUNTAR SI SE DESEA JUGAR NUEVAMENTE --------
 def jugar_nuevamente():
     while True:
+        #elimina espacios y convierte todas las letras a minúsculas
         respuesta = input("¿Deseas jugar nuevamente? (si/no): ").strip().lower()
         if respuesta in ["si", "sí", "s"]:
             return True
