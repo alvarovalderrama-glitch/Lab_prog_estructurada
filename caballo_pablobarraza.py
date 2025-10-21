@@ -38,7 +38,8 @@ tablero = [[0 for _ in range(MAX)] for _ in range(MAX)]  # tablero vacío
 tablero[0][0] = 1  # empezamos en la esquina superior izquierda
 
 if recorrido_caballo(0, 0, 1, tablero):
-    print("✅ Hay una solución encontrada:\n")
+    print("Hay una solución encontrada:\n")
     mostrar_tablero(tablero)
 else:
-    print("❌ No hay solución para este tamaño de tablero.")
+    print("No hay solución para este tamaño de tablero.")
+
