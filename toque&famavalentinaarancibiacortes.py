@@ -1,27 +1,27 @@
 import random
-MAX = int(input("ingrese la cantidad de números que desee adivinar (máximo 9): "))
-while MAX > 9 or MAX < 1:
-    print("INGRESE UN NÚMERO ENTRE 1 Y 9")
-    MAX = int(input("ingrese la cantidad de números que desee adivinar (máximo 9): "))
-
-adivina = random.sample(range(1, 10), MAX)
-print("Debes adivinar",MAX,"números ¡A JUGAR!")
-tablero = ["*" for _ in range(MAX)]
-
-
-def mostrar_tablero(tablero):
-    print("\n" + "-" * (MAX * 5 + 1))
-    for celda in tablero:
-        print(f"| {celda:2}", end=" ")
-    print("|")
-    print("-" * (MAX * 5 + 1))
-    print("")
-    
-aciertos = 0
-contador = 0
 
 def jugar():
-    global aciertos, contador
+    MAX = int(input("ingrese la cantidad de números que desee adivinar (máximo 9): "))
+    while MAX > 9 or MAX < 1:
+        print("INGRESE UN NÚMERO ENTRE 1 Y 9")
+        MAX = int(input("ingrese la cantidad de números que desee adivinar (máximo 9): "))
+
+    adivina = random.sample(range(1, 10), MAX)
+    print("Debes adivinar",MAX,"números ¡A JUGAR!")
+    tablero = ["*" for _ in range(MAX)]
+
+
+    def mostrar_tablero(tablero):
+        print("\n" + "-" * (MAX * 5 + 1))
+        for celda in tablero:
+            print(f"| {celda:2}", end=" ")
+        print("|")
+        print("-" * (MAX * 5 + 1))
+        print("")
+    
+    aciertos = 0
+    contador = 0
+
     while aciertos < MAX and contador < 5:
             mostrar_tablero(tablero)
             intentos = int(input("ingrese un número (1 al 9): "))
@@ -49,7 +49,7 @@ def jugar():
                 print("GANASTE, el número era",adivina)
             elif contador == 5:
                 print("PERDISTE, el número era", adivina)
-                
+
 def jugar_nuevamente():
     while True:
         respuesta = input("¿Deseas jugar nuevamente? (si/no): ").strip().lower()
@@ -61,3 +61,7 @@ def jugar_nuevamente():
         else:
             print("Ingrese una respuesta válida (si/no).")
 
+while True:
+    jugar()
+    if not jugar_nuevamente():
+        break
