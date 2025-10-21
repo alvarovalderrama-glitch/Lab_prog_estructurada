@@ -95,7 +95,6 @@ while True:
                 mostrar_estado_partida(fichas_colocadas)
                 print('Ganaste!!')
                 break
-            turno = (turno+1)%2 # El turno cambia para que juegue el bot.
         if turno == 1:
             # Definición de la ficha del bot en ese turno y actualización del estado de la partida
             posicion_bot = indices_disponibles[random.randint(0,len(indices_disponibles)-1)]
@@ -106,8 +105,10 @@ while True:
                 mostrar_estado_partida(fichas_colocadas)
                 print('Perdiste JAJAJAAJAJA')
                 break
-            turno = (turno+1)%2 # El turno cambia para que juegue el usuario.
             mostrar_estado_partida(fichas_colocadas) # Se muestra el estado de la partido siempre que el bot termine de jugar.  
+        turno = (turno+1)%2 # El turno cambia para que juegue el siguiente
     else: # Si ya no hay espacio para más fichas y no se detuvo la ejecución del ciclo while, significa que hubo un empate.
+        if turno == 1:
+            mostrar_estado_partida(fichas_colocadas)
         print('Empate')
         break
