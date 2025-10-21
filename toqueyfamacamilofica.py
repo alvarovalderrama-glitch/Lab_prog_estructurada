@@ -19,13 +19,32 @@ while True:
     intento = input(" Ingresa un número de 4 dígitos: ")
 
     # Validar que el intento sea válido
-    if len(intento) != 4 or not intento.isdigit():
-        print(" Debes ingresar exactamente 4 dígitos.\n")
-        continue
+    if len(intento) != 4:
+    print(" Debes ingresar exactamente 4 caracteres.\n")
+    continue
 
-    if len(set(intento)) != 4:
-        print(" No repitas números.\n")
-        continue
+solo_digitos = True
+for numero in intento:
+    if numero not in "0123456789":
+        solo_digitos = False
+        break
+
+if not solo_digitos:
+    print(" Debes ingresar solo números.\n")
+    continue
+
+repetido = False
+for i in range(len(intento)):
+    for j in range(i + 1, len(intento)):
+        if intento[i] == intento[j]:
+            repetido = True
+            break
+    if repetido:
+        break
+if repetido:
+    print("no se deben repetir numeros")
+
+    continue
 
     intentos += 1
 
@@ -45,4 +64,5 @@ while True:
     #  Verificar si adivinó
     if famas == 4:
         print(f" ¡Felicidades! Adivinaste el número {numero_secreto} en {intentos} intentos.")
+
         break
