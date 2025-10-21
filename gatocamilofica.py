@@ -41,12 +41,12 @@ def jugada_maquina():
     return None
 
 #  Inicio del juego
-print("Bienvenido al Gato :3 (sin exec)")
+print("Bienvenido al Gato :3")
 print("Tú eres 'X' y la máquina es 'O'\n")
 
 turno = "X"
 
-# Paso 6: Bucle del juego
+# Bucle del juego
 for i in range(9):
     mostrar_tablero()
 
@@ -84,4 +84,5 @@ for i in range(9):
 
 else:
     mostrar_tablero()
+
     print("Empate. ¡Nadie ganó!")
