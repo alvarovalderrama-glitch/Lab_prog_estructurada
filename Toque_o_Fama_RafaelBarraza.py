@@ -40,7 +40,8 @@ while fama != 4 and intentos < max_intentos:     #Mientras que fama sea distinto
     fama = 0
     toque = 0
 
-    #  Comparar posición por posición 
+    #  Comparar posición por posición
+    if w == a: fama += 1
     if x == b: fama += 1
     if y == c: fama += 1
     if z == d: fama += 1
