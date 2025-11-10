@@ -3,8 +3,12 @@ def valida(tablero, candidato, x, y):
     """Verifica si la posición alcanzada con el movimiento es válida"""
     nx = x + pos_x[candidato - 1]
     ny = y + pos_y[candidato - 1]
+    
+    # Comprobar que las nuevas coordenadas no salgan del tablero
     if nx < 0 or nx >= tamaño_tablero:
         return False
+    
+    # Comprobar que la casilla no haya sido visitada
     if ny < 0 or ny >= tamaño_tablero:
         return False
     if tablero[nx][ny] != 0:
