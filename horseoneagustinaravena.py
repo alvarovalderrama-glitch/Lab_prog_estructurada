@@ -67,9 +67,9 @@ def solucion(tablero):
         if(valida(tablero, candidato, x, y)):
             nx, ny = siguiente_posicion(tablero, candidato, x, y)
             tablero[nx][ny] = contador + 1
-            mostrar_tablero(tablero)
+            
             if(final(tablero)):
-                mostrar_tablero(tablero)
+                
                 soluciones +=1 #se le suma 1 cada que haya solucion
                 pasos = contador + 1 #contamos los pasos
                 tablero[nx][ny] = 0
@@ -101,7 +101,7 @@ def solucion(tablero):
                 candidato = tablero_aux[nx][ny] +1
                 tablero_aux[nx][ny] = 0
                 x =nx; y=ny
-                mostrar_tablero(tablero)
+                
   
     with open("soluciones_minimas.txt", "w") as archivo: #se crea el archivo soluciones minimas
         archivo.write("Menor cantidad de pasos: " + str(min_pasos) + "\n")
