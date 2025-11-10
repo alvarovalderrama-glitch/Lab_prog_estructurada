@@ -104,7 +104,7 @@ pos_x = [-2, -1, 1, 2, 2, 1, -1, -2] # desplazamientos horizontales del caballo
 pos_y = [1, 2, 2, 1, -1, -2, -2, -1] # desplazamientos verticales del caballo
 
 # Crear tablero vacío
-tablero = [[0 for i in range(tamaño_tablero)] for i in range(tamaño_tablero)]
+tablero = [[0 for i in range(tamaño_tablero)] for j in range(tamaño_tablero)]
 
 # Posición inicial del caballo
 tablero[0][0] = 1  # posición inicial
@@ -121,4 +121,5 @@ if una_solucion:
     print(f"Cantidad total de soluciones: {cantidad}")
 
 else:
+
     print("No se encontró una solución")
