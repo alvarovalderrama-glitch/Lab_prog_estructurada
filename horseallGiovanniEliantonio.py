@@ -43,14 +43,17 @@ def copiar_tablero(tablero):
     """Devuelve una copia independiente del tablero actual.
     Esto permite guardar una solución sin que sea modificada
     por futuros retrocesos"""
-    return [fila[:] for fila in tablero]
+    copia = []
+    for fila in tablero:
+        copia.append(fila[:])
+    return copia     # Copia cada fila de la matriz
 
 
 def mostrar_tablero(tablero):
     # Imprime el tablero en formato cuadrado
     for i in range(tamaño_tablero):
         for j in range(tamaño_tablero):
-            print(f"{tablero[i][j]:2}", end=" ")
+            print(f"{tablero[i][j]:2}", end=" ") # Imprime cada casilla con 2 espacios
         print("")
     print("")
 
@@ -123,3 +126,4 @@ if una_solucion:
 else:
 
     print("No se encontró una solución")
+
