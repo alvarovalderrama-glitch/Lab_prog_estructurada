@@ -1,4 +1,4 @@
-import random  # Importa el módulo random, usado para generar números aleatorios
+import random  # Importa la libreria random, usado para generar números aleatorios
 
 # Pide el tamaño del tablero cuadrado (n x n)
 MAX = int(input("Ingrese el número de fila y columnas que desea (Será un tablero cuadrado, tendrá la misma cantida de filas y de columnas):  \n> "))
@@ -208,4 +208,5 @@ while True:
 
     else:
         print("Error, opción invalida.")
+
 
