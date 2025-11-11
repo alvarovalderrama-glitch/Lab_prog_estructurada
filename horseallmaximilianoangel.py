@@ -1,21 +1,6 @@
 # Pide el tamaño del tablero cuadrado (número de filas y columnas)
 MAX = int(input("Ingrese el número de fila y columnas que desea (Será un tablero cuadrado, tendrá la misma cantida de filas y de columnas):  \n> "))
 
-# Muestra el menú de opciones hasta que se ingrese 1 o 2
-while True:
-    print("""
-|==============Opciones del caballo==============|
-    1.- Quiero todas las soluciones.
-    2.- Salir.
-|================================================|
- """)  # Imprime el menú de opciones
-    
-    seleccion = input("Ingrese la opción que desea usar:  \n> ")  # Lee la opción elegida por el usuario
-    if seleccion in ("1", "2"):  # Si la opción es 1 o 2
-        break  # Sale del bucle y continúa
-    else:
-        print("Error, opción invalida.")  # Mensaje cuando la opción no es válida
-
 todas_soluciones = [] # Lista para almacenar las soluciones.
 
 # Función validación.
@@ -102,6 +87,23 @@ def mostrar_tablero(tablero):
 
 
 ### Main ###
+
+# Muestra el menú de opciones hasta que se ingrese 1 o 2
+while True:
+    print("""
+|==============Opciones del caballo==============|
+    1.- Quiero todas las soluciones.
+    2.- Salir.
+|================================================|
+ """)  # Imprime el menú de opciones
+    
+    seleccion = input("Ingrese la opción que desea usar:  \n> ")  # Lee la opción elegida por el usuario
+    if seleccion in ("1", "2"):  # Si la opción es 1 o 2
+        break  # Sale del bucle y continúa
+    else:
+        print("Error, opción invalida.")  # Mensaje cuando la opción no es válida
+
+
 tablero = [[0 for _ in range(MAX)] for _ in range(MAX)] # Crea el tablero (matriz) inicial lleno de ceros
 
 if seleccion == "1": # Si "seleccion" es igual a 1 ejecuta lo que esta en su interior.
@@ -122,5 +124,6 @@ if seleccion == "1": # Si "seleccion" es igual a 1 ejecuta lo que esta en su int
 
 elif seleccion == "2":
     print("Saliendo del programa...") # Imprime el mensaje cuando "seleccion" es igual a 2.
+
 
 
