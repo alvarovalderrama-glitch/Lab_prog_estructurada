@@ -1,8 +1,9 @@
 import copy
-
+# Función que crea el laberinto de 10x10
 def crear_laberinto():
     return [[0 for i in range(10)] for j in range(10)]
 
+# Función que muestra el laberinto
 def mostrar_laberinto(laberinto):
     for linea in laberinto:
         suma = ''
@@ -11,6 +12,7 @@ def mostrar_laberinto(laberinto):
         print(suma)
     print()
 
+# Función que busca las coordenadas donde se aloja una determinada marca en el laberinto
 def buscar_xy(laberinto, marca):
     for i, linea in enumerate(laberinto):
         for j, elemento in enumerate(linea):
@@ -18,10 +20,12 @@ def buscar_xy(laberinto, marca):
                 return (i, j)
     return None
 
+# Función que coloca los obstaculos según las coordenadas que se le entregue dentro de una lista
 def colocar_obstaculos(laberinto, lista_con_x_y_de_los_obstaculos):
     for x, y in lista_con_x_y_de_los_obstaculos:
         laberinto[x][y] = 'x'
 
+# Función que calcula el movimiento que se hara en una determinada posición del laberinto según el indice correspondiente
 def movimiento_coordenada(laberinto, coordenada, indice):
     x, y = coordenada
     delta_x = [0, 1, 0, -1]
@@ -34,6 +38,7 @@ def movimiento_coordenada(laberinto, coordenada, indice):
     else:
         return (n_x, n_y)
 
+# Función que encuentra los caminos desde el inicio hasta el final o determina que no hay caminos.
 def soluciones(laberinto, inicio, final):
     posicion_actual = inicio
     p_x, p_y = posicion_actual
@@ -43,9 +48,11 @@ def soluciones(laberinto, inicio, final):
     camino_solucion = [inicio]
     all_soluciones = []
     laberinto_aux = [[0 for _ in range(10)] for _ in range(10)]
-
+    # El ciclo continua hasta que el indice sea igual a 4, lo que significa que se probaron todas las posibilidades.
     while indice != 4:
+        # Se calcula la nueva posición para la posición actual (que puede no ser valida)
         nueva_posicion = movimiento_coordenada(laberinto, posicion_actual, indice)
+        # Si la nueva posición no es valida, tomara el valor de una lista vacia y se sumara una unidad al indice
         if nueva_posicion == []:
             indice += 1
             while indice == 4 and posicion_actual != inicio:
@@ -55,11 +62,13 @@ def soluciones(laberinto, inicio, final):
                 posicion_actual = buscar_xy(laberinto, marca)
                 p_x, p_y = posicion_actual
                 indice = laberinto_aux[p_x][p_y]
+        # Si la nueva posición es igual al final, hemos encontrado un camino, por lo que se guarda en la lista que almacena los caminos.
         elif nueva_posicion == final:
             copia_solucion = copy.deepcopy(camino_solucion)
             copia_solucion.append(final)
             all_soluciones.append(copia_solucion)
             indice += 1
+        # En caso de no estar en ninguno de los dos casos anteriores, la nueva posición se vuelve la posición actual.
         else:
             marca += 1
             n_x, n_y = nueva_posicion
@@ -72,7 +81,7 @@ def soluciones(laberinto, inicio, final):
     laberinto[p_x][p_y] = 0
 
     return all_soluciones
-
+# Esta función muestra en la terminal todos los caminos diferentes que se pueden recorrer de inicio a final
 def mostrar_camino(laberinto, lista_caminos):
     indice = 1
     for lista in lista_caminos:
@@ -101,9 +110,10 @@ inicio = (0, 0)
 final = (9, 9)
 
 lista_movimientos_ganadores = soluciones(laberinto, inicio, final)
-
+# Si la lista que almacena los caminos ganadores esta vacia, significa que no hay camino en el laberinto para llegar al final.
 if lista_movimientos_ganadores == []:
     print('No es posible llegar a la meta.')
+# De no ser asi, se remplazan los 0 en laberinto por cuadrados vacios y se muestran las soluciones.
 else:
     for fila in laberinto:
         for i, elemento in enumerate(fila):
@@ -114,4 +124,5 @@ else:
     mostrar_laberinto(laberinto)
     
     print('\nSoluciones:')
+
     mostrar_camino(laberinto, lista_movimientos_ganadores)
