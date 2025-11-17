@@ -1,4 +1,3 @@
-# horseunesolcamilorojas.py
 # Recorrido del caballo (una solución)
 
 N = 5  # Tamaño del tablero
@@ -39,4 +38,5 @@ def main(): # Función principal
 
 if __name__ == "__main__": # Punto de entrada del programa
     main() # Ejecuta la función principal
+
 
