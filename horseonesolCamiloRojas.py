@@ -9,7 +9,7 @@ def es_valido(x, y, tablero): # Verifica si la posición es válida
 
 def imprimir_tablero(tablero): # Imprime el tablero
     for fila in tablero: # Imprime cada fila del tablero
-        print(" ".join(f"{c:2}" for c in fila)) # Formatea cada celda con ancho 2
+        print(" ".join(f"{c:2}" for c in fila)) # Formatea cada celda con ancho 2 (hace un espacio en cada ciclo donde se imprimen las matrices)
     print() 
 
 def resolver_caballo(x, y, mov, tablero): # Función recursiva para resolver el problema del caballo
@@ -37,6 +37,7 @@ def main(): # Función principal
 
 if __name__ == "__main__": # Punto de entrada del programa
     main() # Ejecuta la función principal
+
 
 
 
