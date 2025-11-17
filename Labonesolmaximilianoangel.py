@@ -143,7 +143,8 @@ while True:
     1.- Quiero ver la traza.
     2.- Quiero solo la solución.
     3.- Mejor solución.
-    4.- Salir.
+    4.- Otro tablero.
+    5.- Salir.
 |========================================|
  """)
     
@@ -203,10 +204,16 @@ while True:
             print("\nNo hay soluciones posibles.\n")
 
     elif seleccion == "4":
+        tablero.clear()
+        tablero_original = [[0 for _ in range(MAX)] for _ in range(MAX)] 
+        colocar_obstaculo(tablero_original) 
+
+    elif seleccion == "5":
         print("Saliendo del programa...")
         break
 
     else:
         print("Error, opción invalida.")
+
 
 
