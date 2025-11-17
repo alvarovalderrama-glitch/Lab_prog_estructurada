@@ -136,7 +136,8 @@ while True:
     print("""
 |==========Traza del movimiento==========|
     1.- Todas las soluciones.
-    2.- Salir.
+    2.- Otro tablero.
+    3.- Salir.
 |========================================|
  """)
     
@@ -176,10 +177,15 @@ while True:
             # Si no se encontró ninguna solución, muestra este mensaje
             print("\nNo hay soluciones posibles.\n")
 
-
     elif seleccion == "2":
+        tablero.clear()
+        tablero_original = [[0 for _ in range(MAX)] for _ in range(MAX)] 
+        colocar_obstaculo(tablero_original) 
+
+    elif seleccion == "3":
         print("Saliendo del programa...")
         break
 
     else:
         print("Error, opción invalida.")
+
