@@ -1,7 +1,6 @@
 # Recorrido del caballo (una solución)
 
 N = 5  # Tamaño del tablero
-
 mov_x = [2, 1, -1, -2, -2, -1, 1, 2]  # Movimientos en X del caballo
 mov_y = [1, 2, 2, 1, -1, -2, -2, -1]  # Movimientos en Y del caballo
 
@@ -38,5 +37,6 @@ def main(): # Función principal
 
 if __name__ == "__main__": # Punto de entrada del programa
     main() # Ejecuta la función principal
+
 
 
