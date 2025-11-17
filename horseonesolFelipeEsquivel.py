@@ -1,91 +1,95 @@
-MAX = 5  # Tamaño del tablero
+MAX = 5 # Tamaño del tablero
 
-def valida(tablero, candidato, x, y):  #valida las posiciones 
+# módulo valida
+def valida(tablero, candidato, x, y): # verifica si el movimiento es válido
     posx = [-2, -1, 1, 2, 2, 1, -1, -2]
     posy = [1, 2, 2, 1, -1, -2, -2, -1]
     nx = x + posx[candidato - 1] 
     ny = y + posy[candidato - 1]
-    if nx < 0 or nx >= MAX:  #si se sale del tablero por filas 
+    if nx < 0 or nx >= MAX:  #que no se salga del tablero
         return False  
-    if ny < 0 or ny >= MAX: #si se sale del tablero por columna
+    if ny < 0 or ny >= MAX: 
         return False
-    if tablero[nx][ny] != 0:   #si fue visitada
+    if tablero[nx][ny] != 0: # que no haya sido visitado
         return False 
     return True 
 
-def copiar_tablero(tab):          
-    return [fila[:] for fila in tab]
-
-def siguiente_posicion(tablero, candidato, x, y):  #funcion para moverse a la siguiente posición 
+# módulo siguiente_posicion
+def siguiente_posicion(tablero, candidato, x, y): # calcula la siguiente posición del caballo
     posx = [-2, -1, 1, 2, 2, 1, -1, -2] 
-    posy = [1, 2, 2, 1, -1, -2, -2, -1]        #movimientos
+    posy = [1, 2, 2, 1, -1, -2, -2, -1]
     nx = x + posx[candidato - 1] 
-    ny = y + posy[candidato - 1]        #movimiento hecho
-    return nx, ny         #retorna nueva posición
+    ny = y + posy[candidato - 1]
+    return nx, ny
 
-def final(tablero):        #comprueba si el recorrido está hecho 
-    for i in range(MAX):
-        for j in range(MAX):
-            if tablero[i][j] == 0: 
+# módulo final
+def final(tablero): # verifica si el tablero está completo
+    for i in range(MAX): # fila
+        for j in range(MAX): # columna
+            if tablero[i][j] == 0: # si hay alguna celda vacía
                 return False 
     return True 
 
-def buscar_xy(tablero, contador):    #busca la casilla de un numero en especifico
-    for i in range(MAX):
-        for j in range(MAX):           
-            if tablero[i][j] == contador:
+# módulo buscar_xy
+def buscar_xy(tablero, contador): # busca la posición (x,y) del contador en el tablero
+    for i in range(MAX): # fila
+        for j in range(MAX): # columna
+            if tablero[i][j] == contador: 
                 return i, j
     return None, None
 
-def mostrar_tablero(tablero):      #muestra el tablero
+# módulo mostrar_tablero
+def mostrar_tablero(tablero): 
     for i in range(MAX):
         for j in range(MAX):
             print(f"{tablero[i][j]:2}", end=" ") 
         print("")
     print("")
 
-def solucion(tablero):                
-    candidato = 1       #primer candidato 
-    soluciones = []        #lista vacia 
-    x, y, contador = 0, 0, 1   #donde empieza y el numero de movimiento 
-    tablero_aux = [[0 for _ in range(MAX)] for _ in range(MAX)] #guarda el movimiento en un tablero aparte 
-    tablero[x][y] = contador   #se marca como visitada la casilla 
+# módulo solucion (principal)
+def solucion(tablero): # intenta resolver el problema del caballo usando backtracking
+    candidato = 1 
+    resuelto = False
+    x, y, contador = 0, 0, 1 
+    tablero_aux = [[0 for _ in range(MAX)] for _ in range(MAX)] # tablero auxiliar para guardar los candidatos probados
+    tablero[x][y] = contador # marca la primera posición
 
-    while True:
-        if 1 <= candidato <= 8:   #se ocupa un candidato 
-            if valida(tablero, candidato, x, y):   # si es valido el movimiento
-                nx, ny = siguiente_posicion(tablero, candidato, x, y) # se mueve 
-                tablero[nx][ny] = contador + 1 #se marca en la casilla 
-                
-                if final(tablero):   # si llegó al final 
-                    soluciones.append(copiar_tablero(tablero)) #se agrega la solución a la lista 
-                    return soluciones #retorna la lista 
-                else:
-                    tablero_aux[x][y] = candidato # que movimiento se ocupo 
-                    x, y = nx, ny #nueva posición del caballo 
-                    contador += 1   #siguiente numero 
-                    candidato = 1   #se empieza desde el primer candidato 
+    while candidato <= 8 and not resuelto: # mientras haya candidatos y no esté resuelto
+        if valida(tablero, candidato, x, y): # si el movimiento es válido
+            nx, ny = siguiente_posicion(tablero, candidato, x, y) # calcula la siguiente posición
+            tablero[nx][ny] = contador + 1
+            mostrar_tablero(tablero)
+            if final(tablero): # si el tablero está completo
+                resuelto = True # marca como resuelto
             else:
-                candidato += 1
+                tablero_aux[x][y] = candidato # guarda el candidato probado
+                x, y = nx, ny # actualiza la posición
+                contador += 1
+                candidato = 1
         else:
-            if x == 0 and y == 0: # si volvimos al inicio 
-                break
-
-            tablero[x][y] = 0 #desmarca la casilla 
-            contador -= 1   #retrocede el contador
-            nx, ny = buscar_xy(tablero, contador)  #retrocede en la matriz
-            candidato = tablero_aux[nx][ny] + 1     # se ocupa otro candidato
-            tablero_aux[nx][ny] = 0  #limpia la matriz aux 
-            x, y = nx, ny    #mueve a casilla 
-
-    return soluciones  #retorna lista completa 
+            candidato += 1
+            while candidato == 9 and not (x == 0 and y == 0):# si no hay más candidatos y no está en la posición inicial
+                tablero[x][y] = 0  # desmarca la posición
+                contador -= 1  
+                nx, ny = buscar_xy(tablero, contador) # busca la posición del contador
+                if nx is None: 
+                    return False
+                candidato = tablero_aux[nx][ny] + 1 # obtiene el siguiente candidato
+                tablero_aux[nx][ny] = 0
+                x, y = nx, ny
+                mostrar_tablero(tablero)
+    return resuelto
 
 # programa principal
-tablero = [[0 for _ in range(MAX)] for _ in range(MAX)]
+tablero = [[0 for _ in range(MAX)] for _ in range(MAX)] # inicializa el tablero
+mostrar_tablero(tablero)
 
-soluciones = solucion(tablero)
-print("Solución encontrada:")
-mostrar_tablero(soluciones[0])
+if solucion(tablero):  # si se encontró solución
+    print("Hay solución encontrada:") 
+    mostrar_tablero(tablero)
+else: # si no se encontró solución
+    print("No hay solución")
+
 
 
 
