@@ -11,7 +11,7 @@ def imprimir_cuadrado(tablero):  # Función para mostrar el cuadrado formateado
 
 def es_valido(tablero, x, y, num):  # Verifica si el número se puede colocar
     for i in range(N):  # Recorre filas y columnas
-        for j in range(N):
+        for j in range(N): # Recorre filas y columnas
             if tablero[i][j] == num:  # Si ya existe el número en el cuadrado
                 return False  # No se puede repetir
     return True  # Si no se repite, es válido
@@ -20,20 +20,20 @@ def suma_correcta(tablero):  # Verifica si las sumas son iguales
     suma_ref = sum(tablero[0])  # Guarda la suma de la primera fila como referencia
 
     # Verifica filas
-    for fila in tablero:
-        if sum(fila) != suma_ref:
-            return False
+    for fila in tablero: # Recorre cada fila
+        if sum(fila) != suma_ref: # Compara suma con referencia
+            return False # Si no coincide, retorna falso
 
     # Verifica columnas
-    for j in range(N):
-        if sum(tablero[i][j] for i in range(N)) != suma_ref:
-            return False
+    for j in range(N): # Recorre cada columna
+        if sum(tablero[i][j] for i in range(N)) != suma_ref: # Suma columna
+            return False # Si no coincide, retorna falso
 
     # Verifica diagonales
-    if sum(tablero[i][i] for i in range(N)) != suma_ref:
-        return False
-    if sum(tablero[i][N - 1 - i] for i in range(N)) != suma_ref:
-        return False
+    if sum(tablero[i][i] for i in range(N)) != suma_ref: # Suma diagonal principa
+        return False # Si no coincide, retorna falso
+    if sum(tablero[i][N - 1 - i] for i in range(N)) != suma_ref: # Suma diagonal secundaria
+        return False # Si no coincide, retorna falso
 
     return True  # Si todas las sumas coinciden
 
@@ -78,4 +78,5 @@ def main():
         print("No se pudo generar un cuadrado mágico válido.")  # Mensaje de fallo
 
 if __name__ == "__main__":  # Ejecuta el programa principal
+
     main()
