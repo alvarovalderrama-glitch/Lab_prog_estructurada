@@ -25,7 +25,7 @@ def buscar(x, y, camino, a, visitado, soluciones):
     visitado[x][y] = True #marca la celda como visitada
 
     if (x, y) == meta: #si se llega a la meta la solucion se guarda
-        soluciones.appent(1) #añade un contador
+        soluciones.append(1) #añade un contador
         tablero_solucion = [fila[:] for fila in tablero] #guarda una copia del tablero
         for i in range(a): #recorre el camino hasta llegar a 'a'
             cx, cy = camino[i] #
@@ -46,3 +46,4 @@ soluciones = []
 buscar(inicio[0], inicio[1], camino, 0, visitado, soluciones)
 
 print(f"\nTotal de soluciones encontradas: {len(soluciones)}")
+
