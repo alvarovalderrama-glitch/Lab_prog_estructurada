@@ -1,4 +1,4 @@
-### Laberinto ###
+### Laberinto todas las soluciones ###
 import random
 
 # Asignar variables
@@ -153,5 +153,6 @@ def main():
             mostrar_soluciones_tablero(tablero, sol_mas_corta, MAX)
     else:
         print("No hay solución.")
+
 
 main()
