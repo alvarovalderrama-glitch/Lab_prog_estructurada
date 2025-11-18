@@ -30,8 +30,8 @@ tablero= [[-1 for _ in range(MAX)]for _ in range(MAX)] #se crea un tablero
 tablero[0][0] = 0 #posiciona caballo
 soluciones = [] #guarda soluciones
 devolver(0,0,1, tablero, soluciones)
-print(f'hay {len(soluciones)} soluciones') #enumera las soluciones
 for i, o in enumerate(soluciones, 1):  #separa los tableros existentes y les asigna un numero de serie empezando por el 1
     print(f'Solucion {i}:') #imprime numero de serie
     tableroo(o) #imprime tableros guardados
+
 
