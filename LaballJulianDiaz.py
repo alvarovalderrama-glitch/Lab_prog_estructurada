@@ -23,15 +23,34 @@ def resolver_todas(tablero, x, y, soluciones, paso):
         resolver_todas(tablero, x, y - 1, soluciones, paso + 1)
         tablero[x][y] = 0
 
+# -------------------------------
+# GENERAR TABLERO CON OBSTÁCULOS
+# -------------------------------
 n = int(input("Ingrese tamaño del laberinto (n x n): "))
 tablero = [[0 for _ in range(n)] for _ in range(n)]
+
+# porcentaje de obstáculos
+porcentaje = 0.3  
+
+for i in range(n):
+    for j in range(n):
+        if random.random() < porcentaje:
+            tablero[i][j] = -1
+
+# asegurar inicio y fin libres
+tablero[0][0] = 0
+tablero[n-1][n-1] = 0
+
 soluciones = []
 resolver_todas(tablero, 0, 0, soluciones, 1)
 
-with open("soluciones_numeradas.txt", "w") as f:
-    for i, sol in enumerate(soluciones, start=1):
-        f.write(f"Solución #{i}\n")
-        f.write(mostrar_tablero(sol))
-        f.write("\n" + "-" * 30 + "\n")
+if soluciones:
+    with open("soluciones_numeradas.txt", "w") as f:
+        for i, sol in enumerate(soluciones, start=1):
+            f.write(f"Solución #{i}\n")
+            f.write(mostrar_tablero(sol))
+            f.write("\n" + "-" * 30 + "\n")
 
-print(f"Se encontraron {len(soluciones)} soluciones y se guardaron en 'soluciones_numeradas.txt'")
+    print(f"Se encontraron {len(soluciones)} soluciones y se guardaron en 'soluciones_numeradas.txt'")
+else:
+    print("No existe solución para este laberinto con obstáculos.")
