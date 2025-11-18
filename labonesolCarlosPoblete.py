@@ -73,5 +73,4 @@ def laberinto():
         print("No hay camino encontrado.")
 
 
-# ejecutar el programa
 laberinto()
