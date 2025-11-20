@@ -1,4 +1,3 @@
-import random  # Se importa la librería random (no la usamos, pero la dejamos por si luego quieres barajar números)
 
 # Función para verificar si el tablero es un cuadrado mágico completo
 def es_magico(tablero, n):
@@ -36,13 +35,13 @@ def tablero_completo(tablero, n):
 
 # Función para validar si se puede poner un número en una posición (x, y)
 def valida(tablero, x, y, num, n, suma_magica):
-    # 1) Verificar que el número no esté repetido en todo el tablero
+    #Verificar que el número no esté repetido en todo el tablero
     for i in range(n):
         for j in range(n):
             if tablero[i][j] == num:  # Si ya existe el número en alguna casilla, no es válido
                 return False
 
-    # 2) Verificar fila y columna respecto a la suma mágica (poda básica)
+    # Verificar fila y columna respecto a la suma mágica
 
     # Comprobar suma parcial de la fila si ya está llena
     fila_valores = [tablero[x][j] if j != y else num for j in range(n)]  # Reemplazamos la posición (x,y) por num
@@ -50,7 +49,7 @@ def valida(tablero, x, y, num, n, suma_magica):
         if sum(fila_valores) != suma_magica:  # Si no suma la suma mágica, no sirve
             return False
 
-    # Comprobar suma parcial de la columna si ya está llena
+    # Comprobar suma de la columna si ya está llena
     columna_valores = [tablero[i][y] if i != x else num for i in range(n)]  # Reemplazamos la posición (x,y) por num
     if 0 not in columna_valores:  # Si la columna está completa
         if sum(columna_valores) != suma_magica:
@@ -86,7 +85,7 @@ def backtracking(tablero, n, pos, suma_magica):
     fila = pos // n      # Calcula la fila actual a partir de pos
     columna = pos % n    # Calcula la columna actual a partir de pos
 
-    # Si la casilla ya está ocupada (por si algún día pre-rellenas algo), pasar a la siguiente
+    # Si la casilla ya está ocupada, pasar a la siguiente
     if tablero[fila][columna] != 0:
         return backtracking(tablero, n, pos + 1, suma_magica)
 
@@ -115,7 +114,7 @@ def imprimir_tablero(tablero):
 
 # Función principal para generar el tablero y ejecutar backtracking
 def main():
-    n = 3  # Tamaño del cuadrado mágico (puedes cambiar este valor, por ejemplo 3 o 4)
+    n = 3  # Tamaño del cuadrado mágico 
     tablero = [[0] * n for _ in range(n)]  # Inicializa un tablero vacío con ceros
     suma_magica = n * (n * n + 1) // 2     # Fórmula de la suma mágica: n * (n^2 + 1) / 2
 
@@ -128,4 +127,5 @@ def main():
 
 # Llamada a la función principal
 main()
+
 
