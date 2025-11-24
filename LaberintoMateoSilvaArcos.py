@@ -1,5 +1,3 @@
-# Laberinto 8x8 con backtracking (versión simple pero clara)
-
 FILAS = 8
 COLUMNAS = 8
 
@@ -9,14 +7,14 @@ laberinto = [
     [0, 1, 0, 1, 1, 0, 1, 0],
     [0, 0, 0, 1, 0, 0, 0, 0],
     [1, 1, 0, 0, 0, 1, 1, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 1, 1, 0],
+    [1, 0, 0, 1, 0, 0, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 0],
     [1, 1, 1, 1, 1, 0, 0, 0]
 ]
 
 def imprimir_laberinto():
-    """Muestra el laberinto en pantalla con símbolos."""
+    #""Muestra el laberinto en pantalla con símbolos."""
     for fila in range(FILAS):
         for columna in range(COLUMNAS):
             if fila == 0 and columna == 0:
@@ -36,7 +34,7 @@ def imprimir_laberinto():
     print()
 
 def resolver_laberinto(fila, columna):
-    """Intenta llegar desde (fila, columna) hasta la salida usando backtracking."""
+    #""Intenta llegar desde (fila, columna) hasta la salida usando backtracking."""
     # 1) Fuera de límites
     if fila < 0 or fila >= FILAS or columna < 0 or columna >= COLUMNAS:
         return False
