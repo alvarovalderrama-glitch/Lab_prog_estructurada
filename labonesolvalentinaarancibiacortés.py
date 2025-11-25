@@ -1,101 +1,133 @@
-
 # -----------------------------------------------
-# LABERINTO (BACKTRACKING) ÚNICA SOLUCIÓN
+# LABERINTO (BACKTRACKING) UNA SOLUCIÓN
 # -----------------------------------------------
 
+''' Este código resuelve un laberinto usando backtracking iterativo.
+    El camino se marca con números desde 1 hasta llegar al final. '''
 
 MAX = int(input("ingrese las dimensiones del tablero: "))
 
-# ---- Movimientos posibles (derecha, abajo, izquierda, arriba) ----
-mov_x = [0, 1, 0, -1]
-mov_y = [1, 0, -1, 0]
+# ---- Función que valida si se puede mover a la posición nx, ny ----
+def valida(tablero, candidato, x, y):
+    # Movimientos posibles (derecha, abajo, izquierda, arriba)
+    posx = [0, 1, 0, -1]
+    posy = [1, 0, -1, 0]
 
-# ---- Muestra el tablero ----
+    # Cálculo de la nueva posición según el candidato
+    nx = x + posx[candidato-1]
+    ny = y + posy[candidato-1]
+
+    # Verifica si está dentro de los límites del tablero
+    if not (0 <= nx < MAX and 0 <= ny < MAX):
+        return False
+
+    # Devuelve True solo si la celda está libre (0)
+    return tablero[nx][ny] == 0
+
+
+# ---- Calcula la siguiente posición según el movimiento ----
+def siguiente_posicion(x, y, candidato):
+    posx = [0, 1, 0, -1]
+    posy = [1, 0, -1, 0]
+    return x + posx[candidato-1], y + posy[candidato-1]
+
+
+# ---- Verifica si llegamos a la meta del laberinto ----
+def final(nx, ny):
+    return nx == MAX - 1 and ny == MAX - 1
+
+
+# ---- Busca las coordenadas de un número en el tablero ----
+def buscar_xy(tablero, contador):
+    # Recorre todo el tablero buscando el número "contador"
+    for i in range(MAX):
+        for j in range(MAX):
+            if tablero[i][j] == contador:
+                return i, j
+    return None, None  # Si no se encuentra
+
+
+# ---- Backtracking iterativo para buscar una solución ----
+def solucion(tablero):
+    x, y = 0, 0         # Inicio
+    contador = 1        # Número que marca el camino
+    tablero_aux = [[0]*MAX for _ in range(MAX)]  # Guarda el movimiento que se probó en cada celda
+    tablero[x][y] = contador
+    candidato = 1       # Primer movimiento a intentar
+    solucion_encontrada = False
+
+    while not solucion_encontrada:
+        # Primera parte: intentar avanzar
+        if candidato <= 4 and valida(tablero, candidato, x, y):
+            nx, ny = siguiente_posicion(x, y, candidato)
+            tablero[nx][ny] = contador + 1  # Marca la celda con el siguiente número
+
+            # Si llegamos al final, terminamos
+            if final(nx, ny):
+                solucion_encontrada = True
+                break
+
+            # Si no es final, seguimos avanzando
+            tablero_aux[x][y] = candidato  # Guardamos el camino tomado
+            x, y = nx, ny
+            contador += 1
+            candidato = 1  # Reiniciar movimientos
+
+        # Segunda parte: no pudimos avanzar → retroceder
+        else:
+            candidato += 1
+
+            # Si ya probamos los 4 movimientos, retroceder
+            while candidato > 4 and not (x == 0 and y == 0):
+                tablero[x][y] = 0        # Desmarcar la celda
+                contador -= 1            # Volver al número anterior
+                x, y = buscar_xy(tablero, contador)  # Buscar dónde está el contador previo
+
+                if x is None:
+                    return False  # No existe camino válido
+
+                candidato = tablero_aux[x][y] + 1  # Reintentar el siguiente candidato
+                tablero_aux[x][y] = 0             # Limpiar el auxiliar
+
+    return True  # Si encontramos solución
+
+
+# ---- Función que muestra el tablero en pantalla ----
 def mostrar_tablero(tablero):
     for fila in tablero:
-        print(" ".join(f"{c:2}" for c in fila)) #une cada celda de la fila con un espacio
-    print("") #vacío
+        print(" ".join(f"{c:2}" for c in fila))
+    print("")
 
-# ---- Verifica si una posición es válida ----
-def es_valida(tablero, x, y, visitado):
-    return (0 <= x < MAX) and (0 <= y < MAX) and tablero[x][y] != -1 and not visitado[x][y]
 
-# ---- Backtracking para encontrar el mejor camino (mínimos pasos) ----
-def encontrar_mejor_camino(tablero, x, y, camino, visitado, mejor_camino):
-    if x == MAX - 1 and y == MAX - 1:
-        # Si no hay mejor camino o el actual es más corto, lo reemplazamos
-        if not mejor_camino or len(camino) < len(mejor_camino[0]):
-            mejor_camino.clear() #elimina el mejor camino antiguo
-            mejor_camino.append(camino.copy()) #copia el mejor camino nuevo
-        return
+# ---- Colocar obstáculos fijos en el tablero ----
+def colocar_obstaculo(tablero):
+    # Lista de obstáculos predefinidos
+    obstaculos = [(0, 3), (1, 1), (2, 1), (2, 2), (2, 3)]
 
-    visitado[x][y] = True #casilla visitada
+    for x, y in obstaculos:
+        # Solo poner obstáculo si:
+        # - Está dentro del tablero
+        # - No es la casilla inicial
+        # - No es la casilla final
+        if 0 <= x < MAX and 0 <= y < MAX:
+            if (x, y) not in [(0, 0), (MAX-1, MAX-1)]:
+                tablero[x][y] = -1
 
-    for i in range(4):
-        nx = x + mov_x[i]
-        ny = y + mov_y[i]
-        if es_valida(tablero, nx, ny, visitado):
-            camino.append((nx, ny))
-            encontrar_mejor_camino(tablero, nx, ny, camino, visitado, mejor_camino)
-            camino.pop() #permite retroceder al eliminar el último movimiento
-
-    visitado[x][y] = False #Se desmarca la celda al retroceder
-
-# ---- Coloca obstáculos ----
-def colocar_obstaculos(tablero):
-    tablero[0][3] = -1
-    tablero[1][1] = -1
-    tablero[2][1] = -1
-    tablero[2][2] = -1
-    tablero[2][3] = -1
-
-# ---- Guarda el mejor camino en un archivo txt ----
-def guardar_en_txt(mejor_camino, tablero_original, nombre_archivo="mejor_camino.txt"):
-    with open(nombre_archivo, "w", encoding="utf-8") as f: #permite ocupar caracteres especiales
-        if not mejor_camino:
-            f.write("No hay caminos válidos.\n")
-            return
-
-        camino = mejor_camino[0]
-        f.write("Mejor camino (menos pasos):\n")
-        f.write(" → ".join(str(p) for p in camino) + "\n\n")#convierte todo a string y los une con flechas
-
-        # Crear tablero visual con obstáculos
-        tablero_vista = [[" . " for _ in range(MAX)] for _ in range(MAX)]
-        for i in range(MAX):
-            for j in range(MAX):
-                if tablero_original[i][j] == -1:
-                    tablero_vista[i][j] = " X "
-
-        # Marcar el camino con el número de paso
-        for paso, (x, y) in enumerate(camino, start=1): #enumera el camino en orden
-            tablero_vista[x][y] = f"{paso:3d}" #3 espacios (alineado)
-
-        # Escribir el tablero al archivo
-        for fila in tablero_vista:
-            f.write(" ".join(fila) + "\n")
 
 # ---- Programa principal ----
-def main():
-    tablero = [[0]*MAX for _ in range(MAX)]
-    colocar_obstaculos(tablero)
-    visitado = [[False]*MAX for _ in range(MAX)] #las casillas están desocupadas
-    mejor_camino = []
+tablero = [[0]*MAX for _ in range(MAX)]  # Crear tablero vacío
 
-    # Si inicio o fin están bloqueados
-    if tablero[0][0] == -1 or tablero[MAX-1][MAX-1] == -1:
-        with open("mejor_camino.txt", "w", encoding="utf-8") as f:
-            f.write("Inicio o fin bloqueado. No hay caminos.\n")
-        return
+print("Tablero inicial:")
+mostrar_tablero(tablero)
 
-    encontrar_mejor_camino(tablero, 0, 0, [(0,0)], visitado, mejor_camino)
-    if mejor_camino:
-        print(f"Se encontró el mejor camino con {len(mejor_camino[0])} pasos. Se ha guardado en 'mejor_camino.txt'.")
-    else:
-        print("No se encontró ningún camino válido.")
-    
-    guardar_en_txt(mejor_camino, tablero)
+# Colocar obstáculos
+colocar_obstaculo(tablero)
+print("Tablero con obstáculos:")
+mostrar_tablero(tablero)
 
-# ---- Ejecutar ----
-if __name__ == "__main__":
-    main()
+# Resolver
+if solucion(tablero):
+    print("¡Hay solución!")
+    mostrar_tablero(tablero)
+else:
+    print("No hay solución")
