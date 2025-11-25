@@ -5,30 +5,6 @@ def imprimir_tablero(tablero):
         print(" ")
     print(" ")
 
-
-def es_magico(tablero, suma_magica):
-    n = len(tablero)
-
-    # Filas
-    for fila in tablero:
-        if sum(fila) != suma_magica:
-            return False
-
-    # Columnas
-    for c in range(n):
-        if sum(tablero[f][c] for f in range(n)) != suma_magica:
-            return False
-
-    # Diagonales
-    if sum(tablero[i][i] for i in range(n)) != suma_magica:
-        return False
-
-    if sum(tablero[i][n - 1 - i] for i in range(n)) != suma_magica:
-        return False
-
-    return True
-
-
 def suma_parcial_valida(tablero, fila, col, suma_magica):
     n = len(tablero)
 
@@ -74,8 +50,8 @@ def suma_parcial_valida(tablero, fila, col, suma_magica):
 
 def resolver_cuadrado_magico(n):
     tablero = [[0] * n for _ in range(n)]
-    usados = set()
-    suma_magica = n * (n*n + 1) // 2
+    usados = []#crea una lista vacia para los numeros usados
+    suma_magica = n * (n*n + 1) // 2#define el valor de la suma mágica
     encontrado=0
 
     def backtracking(pos):
@@ -94,17 +70,17 @@ def resolver_cuadrado_magico(n):
         for num in range(1, n*n + 1):
             if num not in usados:
                 tablero[fila][col] = num
-                usados.add(num)
+                usados.append(num)
 
                 if suma_parcial_valida(tablero, fila, col, suma_magica):
-                    resultado=backtracking(pos + 1)
+                    resultado=backtracking(pos + 1)#recursividad
                     if resultado:
                         return resultado
 
-                tablero[fila][col] = 0
+                tablero[fila][col] = 0#retroceso
                 usados.remove(num)
         return None
-    solucion=backtracking(0)
+    solucion=backtracking(0)#regresa a la primera posición
     return solucion
 n = int(input("Ingresa el tamaño del tablero: "))
 solucion = resolver_cuadrado_magico(n)
@@ -113,6 +89,7 @@ if solucion:
     imprimir_tablero(solucion)
 else:
     print("No hay solución para un tablero de tamaño", n)
+
 
 
 
