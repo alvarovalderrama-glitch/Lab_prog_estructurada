@@ -34,7 +34,8 @@ def encontrar_vacio(tablero):
 # -------- FUNCIÓN CONFIRMAR SOLUCIÓN --------
 def es_valido_parcial(tablero):
     """Revisa si el tablero en su estado actual aún puede llegar a una solución"""
-    # 1. Revisar filas
+
+    # ---------- 1. Revisar filas ----------
     for fila in range(MAX):
         suma_fila = 0
         fila_llena = True
@@ -48,7 +49,7 @@ def es_valido_parcial(tablero):
         if not fila_llena and suma_fila >= SUMATORIA_MAGICA:
             return False
 
-    # 2. Revisar columnas
+    # ---------- 2. Revisar columnas ----------
     for col in range(MAX):
         suma_col = 0
         col_llena = True
@@ -61,7 +62,33 @@ def es_valido_parcial(tablero):
             return False
         if not col_llena and suma_col >= SUMATORIA_MAGICA:
             return False
-    
+
+    # ---------- 3. Revisar diagonal principal ----------
+    suma_diag1 = 0
+    diag1_llena = True
+    for i in range(MAX):
+        if tablero[i][i] == 0:
+            diag1_llena = False
+        suma_diag1 += tablero[i][i]
+
+    if diag1_llena and suma_diag1 != SUMATORIA_MAGICA:
+        return False
+    if not diag1_llena and suma_diag1 >= SUMATORIA_MAGICA:
+        return False
+
+    # ---------- 4. Revisar diagonal secundaria ----------
+    suma_diag2 = 0
+    diag2_llena = True
+    for i in range(MAX):
+        if tablero[i][MAX - 1 - i] == 0:
+            diag2_llena = False
+        suma_diag2 += tablero[i][MAX - 1 - i]
+
+    if diag2_llena and suma_diag2 != SUMATORIA_MAGICA:
+        return False
+    if not diag2_llena and suma_diag2 >= SUMATORIA_MAGICA:
+        return False
+
     return True
 
 # -------- FUNCIÓN VALIDAR SOLUCIÓN --------
