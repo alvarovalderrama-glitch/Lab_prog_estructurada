@@ -4,7 +4,7 @@ ecuacion = (n * (n**2 + 1)) // 2 # el resultado de cada linea del cuadrado
 cuadrado = [[0 for _ in range(n)] for _ in range(n)] # crea el cuadrado magico
 
 
-def valido(cuadrado): # establece la funcion para saber si el cuadrado
+def valido(cuadrado): # establece la funcion para saber si las filas y columnas cumplen con el cuadrado
     for i in range(n):
         fila = cuadrado[i]
         if 0 not in fila and sum(fila) != ecuacion: # revisa si los numeros en la fila cumplen con la ecuacion
